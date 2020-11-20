@@ -1,0 +1,48 @@
+version: "2.0"
+stories:
+- story: happy path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: show_giftcard
+  - action: action_take_info
+  - active_loop: action_take_info
+  - slot_was_set:
+    - requested_slot: amount
+  - slot_was_set:
+    - amount: '8500'
+  - intent: inform
+    entities:
+    - amount: '8500'
+  - action: action_take_info
+  - slot_was_set:
+    - amount: '8500'
+  - slot_was_set:
+    - mob_no: '9424144238'
+  - intent: inform
+    entities:
+    - mob_no: '9424144238'
+  - action: action_take_info
+  - slot_was_set:
+    - mob_no: '9424144238'
+  - slot_was_set:
+    - site: Flipkart
+  - intent: inform
+    entities:
+    - site: Flipkart
+  - action: action_take_info
+  - active_loop: null
+  - slot_was_set:
+    - site: Flipkart
+  - action: utter_confirm_buy
+  - intent: affirm
+  - action: utter_purchase_succesful
+rules:
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot

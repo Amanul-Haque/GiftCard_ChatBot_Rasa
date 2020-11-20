@@ -1,0 +1,27 @@
+version: "2.0"
+
+stories:
+
+- story: Sad path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: deny
+  - action: utter_goodbye_nobuy
+
+- story: Happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: show_giftcard
+  - action: action_take_info
+  - active_loop: action_take_info
+  - slot_was_set:
+      - email: test.mail.420@gmail.com
+      - amount: 5600
+      - site: amazon
+  - active_loop: null
+  - action: utter_confirm_buy
+  - intent: affirm
+  - action: utter_purchase_succesful
+  

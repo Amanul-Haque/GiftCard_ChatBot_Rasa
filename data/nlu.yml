@@ -1,0 +1,103 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - Hi
+- intent: goodbye
+  examples: |
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - Yes sure
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: show_giftcard
+  examples: |
+    - Can I get some giftcards
+    - Can you show me some Gift vouchers
+    - I need to buy Gift card
+    - Show gift vouchers for [Amazon](site)
+    - I want to buy gift card from [flipkart](site)
+    - I need some gift cards
+    - I want to buy a gift card
+    - Buy GC from [Amazon](site)
+    - I want to purchase a Gift card
+    - Show gift cards
+    - Do you have a gift card from [Myntra](site)
+    - I wish to buy a gift card of Rs [1000](amount)
+    - I would like to buy a gift card.
+    - Suggest me some gift cards for about Rs [500](amount)
+    - I need to buy Gift card from [Amazon](site) of Rs [5000](amount)
+    - I want to buy a gift card from [Myntra](site) of Rs [300](amount)
+    - I need to buy a gift card please
+    - I need a gift card
+- intent: inform
+  examples: |
+    - [Amazon](site)
+    - [500](amount)
+    - [Myntra](site)
+    - [Flipkart](site)
+    - [1000](amount)
+    - [100](amount)
+    - [1500](amount)
+    - [2000](amount)
+    - [5000](amount)
+    - [10000](amount)
+    - [50000](amount)
+    - [Jabong](site)
+    - [Costco](site)
+    - [MyShirtz](site)
+    - [amanul.h.2030@gmail.com](email)
+    - [aqwsedrft@outlook.com](email)
+    - [Amann1234@reddif.com](email)
+    - [rngIsshit@yahoo.in](email)
+    - [carftkriya@zycv.in](email)
+    - [12RR@likndin.com](email)
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+- regex: amount
+  examples: |
+    - [0-9]{3,4,5}
+#- regex: email
+ # examples: |
+ #   - [a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]
