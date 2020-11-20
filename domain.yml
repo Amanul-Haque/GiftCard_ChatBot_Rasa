@@ -47,13 +47,15 @@ responses:
   utter_purchase_succesful:
   - text: 'Sure, A gift card of Rs.{amount} from {site} will be sent to {email} in
       2-4 hours, ThankyouFor Shopping with US '
+actions:
+- send_gift_card
 forms:
   action_take_info:
-    amount:
-    - entity: amount
-      type: from_entity
     site:
     - entity: site
+      type: from_entity
+    amount:
+    - entity: amount
       type: from_entity
     email:
     - entity: email

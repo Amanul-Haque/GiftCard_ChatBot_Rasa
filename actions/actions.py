@@ -7,26 +7,28 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-#from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List
 #
-#from rasa_sdk import Action, Tracker
-#from rasa_sdk.executor import CollectingDispatcher
-#from rasa_sdk.forms import FormAction
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+import smtplib
+#
+class SendGiftCard(Action):
 
-#class ActionFormInfo(FormAction):
-    #@staticmethod
-    #def required_fields(tracker: Tracker) ->List[Text]:
-        #return ["site" ,"amount" ,"mob_no"]
-    #def name(self):
-        #return 'action_take_info'
-    #def submit(self,dispatcher,tracker,domain):
-        #site = tracker.get_slot("site"),
-        #mob_no = tracker.get_slot("mob_no")
-        #amount = tracker.get_slot("amount")
-        #dispatcher.utter_message("Your Gift card of Rupees")
-        #dispatcher.utter_message(amount)
-        #dispatcher.utter_message("from the website")
-        #dispatcher.utter_message(site)
-        #dispatcher.utter_message("Will be Delivered to you through Whatsapp on :")
-        #dispatcher.utter_message(mob_no)
-        #dispatcher.utter_message('Thankyou for shopping with us, Hope to see you soon!')
+     def name(self) -> Text:
+         return "send_gift_card"
+
+     def run(self, dispatcher: CollectingDispatcher,
+           tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            site = tracker.get_slot("site"),
+            to_mail = tracker.get_slot("email")
+            amount = tracker.get_slot("amount")
+            s = smtplib.SMTP('smtp.gmail.com', 587) 
+            s.starttls() 
+            s.login("sendergiftcard@gmail.com", "gift@123")
+            message = "Your gift card code for {} of Rs. {} is ZXCV-1234-ASDF".format(site,amount)
+            s.sendmail("sendergiftcard@gmail.com", to_mail, message)
+            s.quit()
+
+#            return []

@@ -24,4 +24,5 @@ stories:
   - action: utter_confirm_buy
   - intent: affirm
   - action: utter_purchase_succesful
+  - action: send_gift_card
   
