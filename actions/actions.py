@@ -11,8 +11,12 @@ from typing import Any, Text, Dict, List
 #
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import EventType
 import smtplib
+import pandas as pd
 #
+df = pd.read_csv("D:\GoBaskt-Intern\GC bot V5\GC_Database.csv")
+
 class SendGiftCard(Action):
 
      def name(self) -> Text:
@@ -30,5 +34,30 @@ class SendGiftCard(Action):
             message = "Your gift card code for {} of Rs. {} is ZXCV-1234-ASDF".format(site,amount)
             s.sendmail("sendergiftcard@gmail.com", to_mail, message)
             s.quit()
+class AskForSite(Action):
+    def name(self) -> Text:
+        return "action_ask_site"
 
-#            return []
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        available_companies = df.Company.unique()
+        print('Please select from the following companies:{}'.format(available_companies))
+        
+        #dispatcher.utter_message(text='Please select from the following companies:{}'.format(available_companies))
+        return []
+        
+class AskForAmount(Action):
+    def name(self) -> Text:
+        return "action_ask_amount"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        site = tracker.get_slot("site")
+        avl_cards = df[df['Company'] == site].Amount.unique() #Getting unique values of the card
+        avl_cards.sort()
+        print('We have the following cards available'.format(avl_cards))
+
+        #dispatcher.utter_message(text='We have the following cards available'.format(avl_cards))
+        return []

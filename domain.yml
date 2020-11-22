@@ -13,6 +13,7 @@ entities:
 - site
 - amount
 - email
+- mob_no
 slots:
   amount:
     type: float
@@ -22,20 +23,21 @@ slots:
   email:
     type: text
     influence_conversation: true
+  mob_no:
+    type: unfeaturized
+    influence_conversation: false
+  requested_slot:
+    type: unfeaturized
+    influence_conversation: false
   site:
     type: text
     influence_conversation: true
 responses:
   utter_greet:
   - text: Hey! How can I help you?
-  utter_ask_site:
-  - text: Can you please provide the name of site for which you want the gift card
-      for
-  utter_ask_amount:
-  - text: What should be the value of the Gift card?
-  - text: What amount of gift card how you want?
   utter_ask_email:
-  - text: Can you please provide me you E-mail ID where you want to recieve the gift card.
+  - text: Can you please provide me you E-mail ID where you want to recieve the gift
+      card.
   utter_confirm_buy:
   - text: Should I confirm your purchase?
   utter_goodbye:
@@ -49,15 +51,16 @@ responses:
       2-4 hours, ThankyouFor Shopping with US '
 actions:
 - send_gift_card
+- action_ask_site
+- action_ask_amount
 forms:
   action_take_info:
     site:
     - entity: site
       type: from_entity
-    amount:
-    - entity: amount
-      type: from_entity
     email:
     - entity: email
       type: from_entity
-
+    amount:
+    - entity: amount
+      type: from_entity
