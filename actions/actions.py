@@ -28,10 +28,12 @@ class SendGiftCard(Action):
             site = tracker.get_slot("site"),
             to_mail = tracker.get_slot("email")
             amount = tracker.get_slot("amount")
+            card = df[(df['Company'] == site )& (df['Amount'] == amount)]
+            send_code = card.iloc[0]['Code']
             s = smtplib.SMTP('smtp.gmail.com', 587) 
             s.starttls() 
             s.login("sendergiftcard@gmail.com", "gift@123")
-            message = "Your gift card code for {} of Rs. {} is ZXCV-1234-ASDF".format(site,amount)
+            message = "Your gift card code for {} of Rs. {} is {}".format(site,amount,send_code)
             s.sendmail("sendergiftcard@gmail.com", to_mail, message)
             s.quit()
 class AskForSite(Action):
@@ -42,9 +44,9 @@ class AskForSite(Action):
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[EventType]:
         available_companies = df.Company.unique()
-        print('Please select from the following companies:{}'.format(available_companies))
         
-        #dispatcher.utter_message(text='Please select from the following companies:{}'.format(available_companies))
+        
+        dispatcher.utter_message(text='Please select from the following companies:{}'.format(available_companies))
         return []
         
 class AskForAmount(Action):
@@ -57,7 +59,7 @@ class AskForAmount(Action):
         site = tracker.get_slot("site")
         avl_cards = df[df['Company'] == site].Amount.unique() #Getting unique values of the card
         avl_cards.sort()
-        print('We have the following cards available'.format(avl_cards))
+       
 
-        #dispatcher.utter_message(text='We have the following cards available'.format(avl_cards))
+        dispatcher.utter_message(text='We have the following cards available{}'.format(avl_cards))
         return []

@@ -17,9 +17,10 @@ stories:
   - action: action_take_info
   - active_loop: action_take_info
   - slot_was_set:
-      - email: test.mail.420@gmail.com
-      - amount: 5600
       - site: amazon
+      - amount: 5600
+      - email: test.mail.420@gmail.com
+           
   - active_loop: null
   - action: utter_confirm_buy
   - intent: affirm
